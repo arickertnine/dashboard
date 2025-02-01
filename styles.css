@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+.noticeboard {
+  background: #ff4444;
+  color: white;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.noticeboard h2 {
+  margin: 0;
+}
+
+.noticeboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.noticeboard li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 3px;
+}
+
+.widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+.widget {
+  flex: 1 1 calc(33.333% - 20px);
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.widget h2 {
+  margin-top: 0;
+}
+
+.widget ul {
+  list-style: none;
+  padding: 0;
+}
+
+.widget li {
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 3px;
+}
+
+.widget li.highlight {
+  background: #fff3cd;
+  font-weight: bold;
+}
