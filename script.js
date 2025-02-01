@@ -41,6 +41,7 @@ async function fetchWeatherWarnings() {
 }
 
 // Fetch Fire Warnings
+
 async function fetchFireWarnings() {
   const rssUrl = "https://www.rfs.nsw.gov.au/feeds/majorIncidents.xml";
   const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(rssUrl);
@@ -59,22 +60,25 @@ async function fetchFireWarnings() {
       const title = item.querySelector("title")?.textContent;
       const link = item.querySelector("link")?.textContent;
       const date = item.querySelector("pubDate")?.textContent;
+      const category = item.querySelector("category")?.textContent; // Get the category
 
-      if (title && link && date) {
-        warnings.push({ title, link, date });
+      if (title && link && date && category) {
+        warnings.push({ title, link, date, category });
 
-        // Determine the warning level and icon
+        // Determine the warning level and icon based on the category
         let icon = "";
-        if (title.includes("Emergency")) {
+        if (category.includes("Emergency")) {
           icon = "icons/fire-emergency.png";
-        } else if (title.includes("Watch and Act")) {
+        } else if (category.includes("Watch and Act")) {
           icon = "icons/fire-watch-act.png";
-        } else if (title.includes("Advice")) {
+        } else if (category.includes("Advice")) {
           icon = "icons/fire-advice.png";
         }
 
+        console.log(`Fire Warning: ${title}, Category: ${category}, Icon: ${icon}`); // Debugging
+
         // Add to noticeboard if it's an emergency
-        if (title.includes("Emergency")) {
+        if (category.includes("Emergency")) {
           const noticeItem = document.createElement("li");
           noticeItem.innerHTML = `<img src="${icon}" class="icon"> ${title} (${new Date(date).toLocaleDateString()})`;
           noticeboardList.appendChild(noticeItem);
@@ -92,13 +96,13 @@ async function fetchFireWarnings() {
       a.href = warning.link;
       a.target = "_blank";
 
-      // Determine the warning level and icon
+      // Determine the warning level and icon based on the category
       let icon = "";
-      if (warning.title.includes("Emergency")) {
+      if (warning.category.includes("Emergency")) {
         icon = "icons/fire-emergency.png";
-      } else if (warning.title.includes("Watch and Act")) {
+      } else if (warning.category.includes("Watch and Act")) {
         icon = "icons/fire-watch-act.png";
-      } else if (warning.title.includes("Advice")) {
+      } else if (warning.category.includes("Advice")) {
         icon = "icons/fire-advice.png";
       }
 
