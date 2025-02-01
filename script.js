@@ -53,6 +53,7 @@ async function fetchFireWarnings() {
 
     const items = xmlDoc.querySelectorAll("item");
     const warnings = [];
+    const noticeboardList = document.getElementById("noticeboardList");
 
     items.forEach((item) => {
       const title = item.querySelector("title")?.textContent;
@@ -61,6 +62,23 @@ async function fetchFireWarnings() {
 
       if (title && link && date) {
         warnings.push({ title, link, date });
+
+        // Determine the warning level and icon
+        let icon = "";
+        if (title.includes("Emergency")) {
+          icon = "icons/fire-emergency.png";
+        } else if (title.includes("Watch and Act")) {
+          icon = "icons/fire-watch-act.png";
+        } else if (title.includes("Advice")) {
+          icon = "icons/fire-advice.png";
+        }
+
+        // Add to noticeboard if it's an emergency
+        if (title.includes("Emergency")) {
+          const noticeItem = document.createElement("li");
+          noticeItem.innerHTML = `<img src="${icon}" class="icon"> ${title} (${new Date(date).toLocaleDateString()})`;
+          noticeboardList.appendChild(noticeItem);
+        }
       }
     });
 
@@ -72,8 +90,19 @@ async function fetchFireWarnings() {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.href = warning.link;
-      a.textContent = `${warning.title} (${new Date(warning.date).toLocaleDateString()})`;
       a.target = "_blank";
+
+      // Determine the warning level and icon
+      let icon = "";
+      if (warning.title.includes("Emergency")) {
+        icon = "icons/fire-emergency.png";
+      } else if (warning.title.includes("Watch and Act")) {
+        icon = "icons/fire-watch-act.png";
+      } else if (warning.title.includes("Advice")) {
+        icon = "icons/fire-advice.png";
+      }
+
+      a.innerHTML = `<img src="${icon}" class="icon"> ${warning.title} (${new Date(warning.date).toLocaleDateString()})`;
       li.appendChild(a);
       fireList.appendChild(li);
     });
@@ -95,6 +124,7 @@ async function fetchFloodWarnings() {
 
     // Extract flood warnings (update selector based on the page structure)
     const warnings = [];
+    const noticeboardList = document.getElementById("noticeboardList");
     const warningElements = htmlDoc.querySelectorAll(".warning-item"); // Update this selector
 
     warningElements.forEach((element) => {
@@ -104,6 +134,23 @@ async function fetchFloodWarnings() {
 
       if (title && link && date) {
         warnings.push({ title, link, date });
+
+        // Determine the warning level and icon
+        let icon = "";
+        if (title.includes("Emergency")) {
+          icon = "icons/flood-emergency.png";
+        } else if (title.includes("Watch and Act")) {
+          icon = "icons/flood-watch-act.png";
+        } else if (title.includes("Advice")) {
+          icon = "icons/flood-advice.png";
+        }
+
+        // Add to noticeboard if it's an emergency
+        if (title.includes("Emergency")) {
+          const noticeItem = document.createElement("li");
+          noticeItem.innerHTML = `<img src="${icon}" class="icon"> ${title} (${date})`;
+          noticeboardList.appendChild(noticeItem);
+        }
       }
     });
 
@@ -115,8 +162,19 @@ async function fetchFloodWarnings() {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.href = warning.link;
-      a.textContent = `${warning.title} (${warning.date})`;
       a.target = "_blank";
+
+      // Determine the warning level and icon
+      let icon = "";
+      if (warning.title.includes("Emergency")) {
+        icon = "icons/flood-emergency.png";
+      } else if (warning.title.includes("Watch and Act")) {
+        icon = "icons/flood-watch-act.png";
+      } else if (warning.title.includes("Advice")) {
+        icon = "icons/flood-advice.png";
+      }
+
+      a.innerHTML = `<img src="${icon}" class="icon"> ${warning.title} (${warning.date})`;
       li.appendChild(a);
       floodList.appendChild(li);
     });
