@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Noticeboard Section -->
-  <div class="noticeboard" id="noticeboard">
-    <h2>Noticeboard</h2>
-    <ul id="noticeboardList"></ul>
-  </div>
-
-  <!-- Widgets Section -->
-  <div class="widgets">
-    <!-- Weather Warnings Widget -->
-    <div class="widget">
-      <h2>Weather Warnings</h2>
-      <ul id="weatherList"></ul>
+    <div id="notice-board">
+        <h2>Notice Board</h2>
+        <div id="notice-content"></div>
     </div>
-
-    <!-- Emergency Warnings Widget -->
-    <div class="widget">
-      <h2>Emergency Warnings</h2>
-      <ul id="emergencyList"></ul>
+    <div id="agency-feeds">
+        <div id="weather-warnings" class="feed-column">
+            <h3>Weather Warnings</h3>
+            <div id="weather-content"></div>
+        </div>
+        <div id="rfs-updates" class="feed-column">
+            <h3>RFS Major Fire Updates</h3>
+            <div id="rfs-content"></div>
+        </div>
+        <div id="ses-warnings" class="feed-column">
+            <h3>SES Warnings</h3>
+            <div id="ses-content"></div>
+        </div>
     </div>
-
-    <!-- Train Line Statuses Widget -->
-    <div class="widget">
-      <h2>Train Line Statuses</h2>
-      <ul id="trainList"></ul>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
