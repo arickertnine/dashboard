@@ -9,7 +9,8 @@ const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 async function fetchWeatherWarnings() {
     try {
-        const response = await fetch(`${CORS_PROXY}http://www.bom.gov.au/fwo/IDZ00061.warnings_land_nsw.xml`);
+        // Use the HTTPS version of the BOM feed
+        const response = await fetch(`https://www.bom.gov.au/fwo/IDZ00061.warnings_land_nsw.xml`);
         const text = await response.text();
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(text, "text/xml");
@@ -37,6 +38,7 @@ async function fetchWeatherWarnings() {
 
 async function fetchRFSUpdates() {
     try {
+        // Use a CORS proxy for the RFS feed
         const response = await fetch(`${CORS_PROXY}https://www.rfs.nsw.gov.au/feeds/major-Fire-Updates.xml`);
         const text = await response.text();
         const parser = new DOMParser();
@@ -65,7 +67,8 @@ async function fetchRFSUpdates() {
 
 async function fetchSESWarnings() {
     try {
-        const metadataUrl = 'https://data.nsw.gov.au/data/api/3/action/package_show?id=6552b1a5-9164-4f3f-a9ed-b06e1e01d984';
+        // Use a CORS proxy for the SES feed
+        const metadataUrl = `${CORS_PROXY}https://data.nsw.gov.au/data/api/3/action/package_show?id=6552b1a5-9164-4f3f-a9ed-b06e1e01d984`;
         const metadataResponse = await fetch(metadataUrl);
         const metadata = await metadataResponse.json();
 
@@ -73,7 +76,7 @@ async function fetchSESWarnings() {
         const resourceId = metadata.result.resources[0].id;
 
         // Fetch the actual SES warnings data using the resource ID
-        const dataUrl = `https://data.nsw.gov.au/data/api/3/action/datastore_search?resource_id=${resourceId}`;
+        const dataUrl = `${CORS_PROXY}https://data.nsw.gov.au/data/api/3/action/datastore_search?resource_id=${resourceId}`;
         const dataResponse = await fetch(dataUrl);
         const data = await dataResponse.json();
         const records = data.result.records;
