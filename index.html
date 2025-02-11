@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>NSW Emergency Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="notice-board">
-        <h2>Notice Board</h2>
-        <div id="notice-content"></div>
-    </div>
-    <div id="agency-feeds">
-        <div id="weather-warnings" class="feed-column">
-            <h3>Weather Warnings</h3>
-            <div id="weather-content"></div>
-        </div>
-        <div id="rfs-updates" class="feed-column">
-            <h3>RFS Major Fire Updates</h3>
-            <div id="rfs-content"></div>
-        </div>
-        <div id="ses-warnings" class="feed-column">
-            <h3>SES Warnings</h3>
-            <div id="ses-content"></div>
-        </div>
-    </div>
+    <h1>NSW Emergency Dashboard</h1>
+    
+    <section id="ses-warnings">
+        <h2>SES Warnings</h2>
+        <ul id="ses-list"></ul>
+    </section>
+    
+    <section id="bom-warnings">
+        <h2>BOM Warnings</h2>
+        <ul id="bom-list"></ul>
+    </section>
+    
+    <section id="rfs-updates">
+        <h2>RFS Major Fire Updates</h2>
+        <ul id="rfs-list"></ul>
+    </section>
+    
     <script src="script.js"></script>
 </body>
 </html>
