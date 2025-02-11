@@ -1,29 +1,37 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
-#notice-board {
-    background-color: #ffcc00;
-    padding: 10px;
+h1 {
     text-align: center;
 }
 
-#agency-feeds {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-}
-
-.feed-column {
-    flex: 1;
-    margin: 0 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
+section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3 {
-    margin-top: 0;
+h2 {
+    color: #d9534f;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom: none;
 }
