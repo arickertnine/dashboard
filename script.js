@@ -4,18 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchRFSUpdates();
 });
 
-function fetchSESWarnings() {
-    fetch("https://www.hazardwatch.gov.au/app-api/alerts")
-        .then(response => response.json())
-        .then(data => {
-            const list = document.getElementById("ses-list");
-            list.innerHTML = data.map(alert => `<li>${alert.title}</li>`).join("");
-        })
-        .catch(error => console.error("Error fetching SES Warnings:", error));
-}
+const CORS_PROXY = "https://corsproxy.io/?";
 
 function fetchBOMWarnings() {
-    fetch("http://www.bom.gov.au/fwo/IDZ00061.warnings_land_nsw.xml")
+    fetch(`${CORS_PROXY}http://www.bom.gov.au/fwo/IDZ00061.warnings_land_nsw.xml`)
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
@@ -26,8 +18,18 @@ function fetchBOMWarnings() {
         .catch(error => console.error("Error fetching BOM Warnings:", error));
 }
 
+function fetchSESWarnings() {
+    fetch(`${CORS_PROXY}https://www.hazardwatch.gov.au/app-api/alerts`)
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById("ses-list");
+            list.innerHTML = data.map(alert => `<li>${alert.title}</li>`).join("");
+        })
+        .catch(error => console.error("Error fetching SES Warnings:", error));
+}
+
 function fetchRFSUpdates() {
-    fetch("https://www.rfs.nsw.gov.au/feeds/major-Fire-Updates.xml")
+    fetch(`${CORS_PROXY}https://www.rfs.nsw.gov.au/feeds/major-Fire-Updates.xml`)
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
